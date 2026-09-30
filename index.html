@@ -1,1 +1,195 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>For Viaa 💗</title>
 
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #ffd6e7, #fff0f6, #ffd9e8);
+      font-family: Arial, sans-serif;
+      overflow: hidden;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 430px;
+      text-align: center;
+      padding: 30px 22px;
+      background: rgba(255,255,255,0.65);
+      border-radius: 28px;
+      box-shadow: 0 10px 35px rgba(180, 80, 120, 0.18);
+      backdrop-filter: blur(8px);
+    }
+
+    .heart {
+      font-size: 55px;
+      animation: heartbeat 1.5s infinite;
+      margin-bottom: 15px;
+    }
+
+    h1 {
+      color: #e85d91;
+      font-size: 27px;
+      margin-bottom: 15px;
+    }
+
+    p {
+      color: #555;
+      line-height: 1.7;
+      font-size: 16px;
+      margin-bottom: 25px;
+    }
+
+    button {
+      border: none;
+      background: #f276a6;
+      color: white;
+      padding: 14px 28px;
+      border-radius: 30px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 6px 15px rgba(220, 80, 130, 0.25);
+      transition: 0.2s;
+    }
+
+    button:active {
+      transform: scale(0.94);
+    }
+
+    #message {
+      display: none;
+      margin-top: 25px;
+      animation: muncul 0.8s ease;
+    }
+
+    #message h2 {
+      color: #e85d91;
+      margin-bottom: 12px;
+    }
+
+    .small {
+      font-size: 14px;
+      color: #888;
+      margin-top: 20px;
+    }
+
+    @keyframes heartbeat {
+      0%, 100% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.12);
+      }
+    }
+
+    @keyframes muncul {
+      from {
+        opacity: 0;
+        transform: translateY(15px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .floating-heart {
+      position: fixed;
+      bottom: -20px;
+      font-size: 20px;
+      animation: naik 5s linear infinite;
+      opacity: 0.7;
+    }
+
+    @keyframes naik {
+      from {
+        transform: translateY(0);
+        opacity: 0;
+      }
+      20% {
+        opacity: 0.8;
+      }
+      to {
+        transform: translateY(-110vh);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+
+    <div class="heart">💗</div>
+
+    <h1>semogaa kamuuu sukaa yaaaa</h1>
+
+    <p>
+      aku bikin sesuatu kecil buat kamu.
+      mungkin sederhana, tapi aku bikinnya dengan tulusss.
+    </p>
+
+    <button onclick="bukaPesan()">
+      tekan disinii 💗
+    </button>
+
+    <div id="message">
+      <h2>for youu, Viaa 💕</h2>
+
+      <p>
+        makasih yaaa udah hadir sampai sejauh ini.
+        aku cuma mau kamu tahu kalau ada seseorang
+        yang selalu seneng bisa mengenal kamu.
+        <br><br>
+        semoga hari-hari kamu selalu dipenuhi hal-hal
+        baik dan orang-orang yang tulus sayang sama kamu.
+        <br><br>
+        happy girlfriend dayyy, Viaaaa 🤍
+      </p>
+
+      <div class="small">
+        dibuat dengan tulusss 💗
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    function bukaPesan() {
+      document.getElementById("message").style.display = "block";
+    }
+
+    function buatHati() {
+      const heart = document.createElement("div");
+      heart.className = "floating-heart";
+      heart.innerHTML = "💗";
+
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.animationDuration = (3 + Math.random() * 3) + "s";
+
+      document.body.appendChild(heart);
+
+      setTimeout(() => {
+        heart.remove();
+      }, 6000);
+    }
+
+    setInterval(buatHati, 800);
+  </script>
+
+</body>
+</html>
