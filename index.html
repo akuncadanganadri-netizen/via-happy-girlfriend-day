@@ -14,317 +14,674 @@
 
 body{
     min-height:100vh;
-    font-family:Arial, Helvetica, sans-serif;
-    background:
-        radial-gradient(circle at 20% 20%, #ff9fc7 0%, transparent 25%),
-        radial-gradient(circle at 80% 80%, #b89cff 0%, transparent 25%),
-        linear-gradient(135deg,#17213b,#30204d,#551f46);
+    font-family:Arial,Helvetica,sans-serif;
     color:white;
     overflow:hidden;
+    background:#182b4a;
 }
 
-/* BACKGROUND */
-.bg-heart{
+/* =========================
+   BACKGROUND
+========================= */
+
+.background{
     position:fixed;
+    inset:0;
+    z-index:-2;
+
+    background:
+        linear-gradient(
+            rgba(16,38,69,.72),
+            rgba(19,25,48,.82)
+        ),
+        url("IMG_20260917_113429_357.webp");
+
+    background-size:cover;
+    background-position:center;
+    filter:blur(1px);
+}
+
+.background::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:
+        radial-gradient(
+            circle at 20% 20%,
+            rgba(255,255,255,.12),
+            transparent 20%
+        ),
+        radial-gradient(
+            circle at 80% 40%,
+            rgba(255,120,180,.12),
+            transparent 25%
+        );
+}
+
+/* =========================
+   FLOATING EMOJI
+========================= */
+
+.float{
+    position:fixed;
+    bottom:-50px;
     font-size:25px;
-    opacity:.18;
-    animation:float 8s linear infinite;
+    opacity:.3;
     pointer-events:none;
+    animation:floatUp 8s linear infinite;
+    z-index:-1;
 }
 
-@keyframes float{
+@keyframes floatUp{
     0%{
-        transform:translateY(110vh) rotate(0deg);
+        transform:translateY(0) rotate(0);
         opacity:0;
     }
-    20%{opacity:.2;}
-    80%{opacity:.2;}
+
+    20%{
+        opacity:.3;
+    }
+
+    80%{
+        opacity:.3;
+    }
+
     100%{
-        transform:translateY(-15vh) rotate(360deg);
+        transform:translateY(-110vh) rotate(360deg);
         opacity:0;
     }
 }
 
-/* MUSIC */
-.music-btn{
+/* =========================
+   MUSIC
+========================= */
+
+.music{
     position:fixed;
-    top:15px;
     right:15px;
+    top:15px;
+
     width:45px;
     height:45px;
+
     border-radius:50%;
     border:2px solid white;
+
     background:rgba(255,255,255,.15);
     color:white;
+
     font-size:20px;
     z-index:100;
-    backdrop-filter:blur(10px);
 }
 
-/* PAGE */
+/* =========================
+   PAGE
+========================= */
+
 .page{
     display:none;
+
     width:100%;
     min-height:100vh;
+
     align-items:center;
     justify-content:center;
-    padding:25px;
+
+    padding:20px;
 }
 
 .page.active{
     display:flex;
 }
 
-/* CARD */
+/* =========================
+   GENERAL CARD
+========================= */
+
 .card{
-    width:min(92%,480px);
-    max-height:88vh;
-    overflow:auto;
-    padding:30px 25px;
-    border-radius:30px;
-    background:rgba(15,20,40,.75);
-    border:2px solid rgba(255,255,255,.8);
+    width:min(92%,500px);
+
+    padding:35px 25px;
+
+    border-radius:32px;
+
+    background:rgba(20,25,45,.78);
+
+    border:2px solid white;
+
     box-shadow:
-        0 0 25px rgba(255,120,180,.25),
-        inset 0 0 25px rgba(255,255,255,.04);
+        0 0 0 2px rgba(255,92,157,.55),
+        0 0 35px rgba(255,92,157,.2);
+
     backdrop-filter:blur(15px);
+
     text-align:center;
-    animation:cardIn .7s ease;
+
+    animation:appear .7s ease;
 }
 
-@keyframes cardIn{
+@keyframes appear{
     from{
         opacity:0;
         transform:scale(.9) translateY(20px);
     }
+
     to{
         opacity:1;
         transform:scale(1) translateY(0);
     }
 }
 
+/* =========================
+   OPENING
+========================= */
+
+.big-heart{
+    font-size:75px;
+    margin-bottom:15px;
+
+    animation:heartBeat 1.3s infinite;
+}
+
+@keyframes heartBeat{
+    0%,100%{
+        transform:scale(1);
+    }
+
+    50%{
+        transform:scale(1.15);
+    }
+}
+
 .title{
-    font-size:30px;
+    font-size:29px;
     font-weight:800;
-    margin-bottom:12px;
+    margin-bottom:15px;
 }
 
 .subtitle{
-    font-size:16px;
-    line-height:1.6;
-    opacity:.9;
+    font-size:17px;
+    line-height:1.7;
 }
 
-/* BUTTON */
 .btn{
+    margin-top:25px;
+
+    padding:14px 28px;
+
     border:none;
-    padding:14px 25px;
-    margin-top:20px;
     border-radius:18px;
-    background:linear-gradient(135deg,#ff4f91,#ff76aa);
+
+    background:
+        linear-gradient(
+            180deg,
+            #dc4c79,
+            #b82d59
+        );
+
     color:white;
-    font-size:16px;
+
+    font-size:17px;
     font-weight:bold;
+
+    border:2px solid white;
+
+    box-shadow:
+        0 5px 15px rgba(0,0,0,.3);
+
     cursor:pointer;
-    box-shadow:0 8px 20px rgba(255,70,140,.3);
-    transition:.25s;
 }
 
 .btn:active{
     transform:scale(.94);
 }
 
-/* OPENING */
-.big-heart{
-    font-size:75px;
-    animation:heartbeat 1.3s infinite;
-    margin-bottom:15px;
+/* =========================
+   PIN PAGE
+========================= */
+
+.pin-card{
+    position:relative;
+
+    width:100%;
+    max-width:560px;
+
+    padding:
+        45px
+        32px
+        45px;
+
+    border-radius:38px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(45,48,70,.91),
+            rgba(24,27,45,.88)
+        );
+
+    border:
+        3px solid rgba(255,255,255,.95);
+
+    box-shadow:
+        0 0 0 2px rgba(255,93,160,.65),
+        0 0 30px rgba(255,87,150,.25),
+        inset 0 0 30px rgba(255,255,255,.04);
+
+    backdrop-filter:blur(15px);
+
+    text-align:center;
+
+    animation:appear .7s ease;
+
+    overflow:hidden;
 }
 
-@keyframes heartbeat{
-    0%,100%{transform:scale(1);}
-    50%{transform:scale(1.15);}
+/* corner */
+
+.corner{
+    position:absolute;
+
+    width:25px;
+    height:25px;
+
+    border-color:#ff76ad;
+    border-style:solid;
 }
 
-/* PIN */
+.top-left{
+    top:17px;
+    left:17px;
+
+    border-width:
+        5px
+        0
+        0
+        5px;
+
+    border-radius:8px 0 0 0;
+}
+
+.bottom-right{
+    bottom:17px;
+    right:17px;
+
+    border-width:
+        0
+        5px
+        5px
+        0;
+
+    border-radius:0 0 8px 0;
+}
+
+/* pin title */
+
+.pin-title{
+    font-size:32px;
+    font-weight:800;
+
+    margin-bottom:17px;
+
+    text-shadow:
+        0 3px 5px rgba(0,0,0,.45);
+}
+
+.pin-subtitle{
+    font-size:19px;
+    line-height:1.5;
+}
+
+/* dots */
+
 .pin-dots{
     display:flex;
+
     justify-content:center;
-    gap:13px;
-    margin:22px 0;
+
+    gap:18px;
+
+    margin:
+        25px
+        0
+        18px;
 }
 
-.dot{
-    width:20px;
-    height:20px;
-    border:3px solid white;
+.pin-dot{
+    width:35px;
+    height:35px;
+
     border-radius:50%;
-    transition:.2s;
+
+    background:transparent;
+
+    border:
+        4px solid white;
+
+    transition:.15s;
 }
 
-.dot.filled{
-    background:#ff5798;
-    box-shadow:0 0 12px #ff5798;
+.pin-dot.active{
+    background:#bd315e;
+
+    box-shadow:
+        0 0 12px #ff6298,
+        0 0 22px rgba(255,83,143,.6);
 }
 
-.pin-display{
-    font-size:20px;
-    min-height:25px;
-    letter-spacing:8px;
+/* pin message */
+
+.pin-result{
+    min-height:70px;
+
+    visibility:hidden;
+
+    font-size:21px;
+    font-weight:bold;
+
+    line-height:1.5;
+
+    margin-bottom:10px;
 }
 
-.keypad{
+.pin-result.show{
+    visibility:visible;
+}
+
+.pin-result.success{
+    color:#ff91ba;
+}
+
+/* keypad */
+
+.pin-keypad{
     display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:10px;
-    margin-top:20px;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap:12px;
+
+    margin-top:5px;
 }
 
-.key{
-    border:none;
-    border-radius:15px;
-    padding:15px;
-    background:rgba(255,70,130,.8);
+.pin-keypad button{
+    height:64px;
+
+    border-radius:17px;
+
+    border:
+        3px solid white;
+
+    background:
+        linear-gradient(
+            180deg,
+            #d94d78,
+            #b72c58
+        );
+
     color:white;
-    font-size:20px;
+
+    font-size:27px;
     font-weight:bold;
+
+    box-shadow:
+        inset 0 2px 3px rgba(255,255,255,.25),
+        0 5px 10px rgba(0,0,0,.25);
+
+    cursor:pointer;
+
+    transition:.08s;
 }
 
-.key:active{
-    transform:scale(.92);
+.pin-keypad button:active{
+    transform:
+        translateY(3px)
+        scale(.94);
 }
 
-.message{
-    margin-top:15px;
-    min-height:25px;
-    font-weight:bold;
-}
+/* =========================
+   STICKER
+========================= */
 
-/* IMAGE */
 .sticker{
-    width:120px;
-    height:120px;
-    object-fit:cover;
+    width:115px;
+    height:115px;
+
+    margin-bottom:15px;
+
     border-radius:50%;
-    border:5px solid rgba(255,255,255,.8);
-    margin-bottom:20px;
-    animation:bounce 2s ease-in-out infinite;
+
+    background:rgba(255,255,255,.85);
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:65px;
+
+    margin-left:auto;
+    margin-right:auto;
+
+    border:5px solid white;
+
+    animation:bounce 2s infinite;
 }
 
 @keyframes bounce{
-    0%,100%{transform:translateY(0);}
-    50%{transform:translateY(-8px);}
+    0%,100%{
+        transform:translateY(0);
+    }
+
+    50%{
+        transform:translateY(-8px);
+    }
 }
 
-/* LIST */
-.beautiful-list{
+/* =========================
+   TEBAK-TEBAKAN
+========================= */
+
+.list{
     text-align:left;
-    margin:20px auto;
+
     width:fit-content;
+
+    margin:
+        20px
+        auto;
+
     font-size:19px;
+
     line-height:1.9;
 }
 
-.hidden-answer{
+.answer{
     color:#ff83b7;
     font-weight:bold;
 }
 
-/* COUNTDOWN */
 .countdown{
     font-size:65px;
+
     font-weight:900;
-    margin:20px;
-    color:#ff7daf;
-    text-shadow:0 0 20px rgba(255,80,150,.7);
+
+    color:#ff77ae;
+
+    text-shadow:
+        0 0 20px rgba(255,90,150,.7);
+
     animation:pop .8s;
 }
 
 @keyframes pop{
-    from{transform:scale(.3);opacity:0;}
-    to{transform:scale(1);opacity:1;}
+    from{
+        transform:scale(.3);
+        opacity:0;
+    }
+
+    to{
+        transform:scale(1);
+        opacity:1;
+    }
 }
 
-/* TYPEWRITER */
+/* =========================
+   TYPEWRITER
+========================= */
+
 .type-text{
     text-align:left;
+
     font-size:17px;
+
     line-height:1.8;
-    min-height:200px;
+
+    min-height:180px;
+
+    white-space:pre-line;
 }
 
 .cursor{
     border-right:2px solid white;
+
     animation:blink .7s infinite;
 }
 
 @keyframes blink{
-    50%{border-color:transparent;}
+    50%{
+        border-color:transparent;
+    }
 }
 
-/* FINAL */
-.final-title{
-    font-size:28px;
-    margin-bottom:15px;
-}
+/* =========================
+   FINAL
+========================= */
 
 .final-text{
     text-align:left;
-    line-height:1.8;
+
     font-size:17px;
+
+    line-height:1.8;
 }
+
+.small{
+    margin-top:18px;
+
+    font-size:13px;
+
+    opacity:.7;
+}
+
+/* HEART RAIN */
 
 .heart-rain{
     position:fixed;
+
+    top:-50px;
+
     pointer-events:none;
-    animation:heartRain 4s linear forwards;
+
+    animation:
+        rain 4s linear forwards;
+
     z-index:200;
 }
 
-@keyframes heartRain{
-    0%{
-        transform:translateY(-10vh) rotate(0);
-        opacity:1;
-    }
-    100%{
-        transform:translateY(110vh) rotate(360deg);
+@keyframes rain{
+    to{
+        transform:
+            translateY(110vh)
+            rotate(360deg);
+
         opacity:0;
     }
 }
 
-.small{
-    font-size:13px;
-    opacity:.7;
-    margin-top:15px;
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:480px){
+
+    .pin-card{
+        padding:
+            40px
+            20px
+            42px;
+    }
+
+    .pin-title{
+        font-size:27px;
+    }
+
+    .pin-subtitle{
+        font-size:17px;
+    }
+
+    .pin-dots{
+        gap:16px;
+    }
+
+    .pin-dot{
+        width:34px;
+        height:34px;
+    }
+
+    .pin-keypad{
+        gap:9px;
+    }
+
+    .pin-keypad button{
+        height:59px;
+        font-size:24px;
+        border-radius:15px;
+    }
+
 }
 </style>
 </head>
 
 <body>
 
-<!-- FLOATING BACKGROUND -->
-<div class="bg-heart" style="left:8%;animation-delay:0s;">♡</div>
-<div class="bg-heart" style="left:22%;animation-delay:2s;">♥</div>
-<div class="bg-heart" style="left:40%;animation-delay:4s;">♡</div>
-<div class="bg-heart" style="left:63%;animation-delay:1s;">♥</div>
-<div class="bg-heart" style="left:82%;animation-delay:3s;">♡</div>
+<!-- BACKGROUND -->
+<div class="background"></div>
+
+<!-- FLOATING EMOJIS -->
+<div class="float" style="left:5%;animation-delay:0s;">♡</div>
+<div class="float" style="left:20%;animation-delay:2s;">💗</div>
+<div class="float" style="left:40%;animation-delay:4s;">♡</div>
+<div class="float" style="left:65%;animation-delay:1s;">💕</div>
+<div class="float" style="left:85%;animation-delay:3s;">♡</div>
 
 <!-- MUSIC -->
 <audio id="music" loop>
-    <source src="ssstik.io_1788416305101.mp3" type="audio/mpeg">
+    <source
+        src="ssstik.io_1788416305101.mp3"
+        type="audio/mpeg">
 </audio>
 
-<button class="music-btn" onclick="toggleMusic()">🎵</button>
+<button
+    class="music"
+    onclick="toggleMusic()">
+    🎵
+</button>
 
 
-<!-- ========================= -->
-<!-- PAGE 1 -->
-<!-- ========================= -->
+<!-- ==================================================
+     PAGE 1 — OPENING
+================================================== -->
 
-<section class="page active" id="page1">
+<section
+    class="page active"
+    id="page1">
+
     <div class="card">
 
-        <div class="big-heart">💗</div>
+        <div class="big-heart">
+            💗
+        </div>
 
         <div class="title">
             semogaa kamuuu sukaa yaaaa
@@ -332,13 +689,17 @@ body{
 
         <p class="subtitle">
             aku bikin sesuatu kecil buat kamu...
-            <br>
-            mungkin sederhana, tapi aku bikinnya
-            dengan tulusss 🥹
+            <br><br>
+            mungkin sederhana,
+            tapi aku bikinnya dengan tulusss 🥹
         </p>
 
-        <button class="btn" onclick="startWebsite()">
+        <button
+            class="btn"
+            onclick="startWebsite()">
+
             tekan disinii 💌
+
         </button>
 
         <p class="small">
@@ -346,69 +707,133 @@ body{
         </p>
 
     </div>
+
 </section>
 
 
-<!-- ========================= -->
-<!-- PAGE 2 PIN -->
-<!-- ========================= -->
+<!-- ==================================================
+     PAGE 2 — PIN
+================================================== -->
 
-<section class="page" id="page2">
-    <div class="card">
+<section
+    class="page"
+    id="page2">
 
-        <div class="sticker">🔐</div>
+    <div class="pin-card">
 
-        <div class="title">
+        <div class="corner top-left"></div>
+        <div class="corner bottom-right"></div>
+
+        <div class="pin-title">
             Tebak PIN-nya yaaw 🔐🎉
         </div>
 
-        <p class="subtitle">
+        <p class="pin-subtitle">
             Masukkan 4 angka PIN yang tepat!
         </p>
 
         <div class="pin-dots">
-            <div class="dot" id="dot1"></div>
-            <div class="dot" id="dot2"></div>
-            <div class="dot" id="dot3"></div>
-            <div class="dot" id="dot4"></div>
+
+            <span
+                class="pin-dot"
+                id="pinDot1">
+            </span>
+
+            <span
+                class="pin-dot"
+                id="pinDot2">
+            </span>
+
+            <span
+                class="pin-dot"
+                id="pinDot3">
+            </span>
+
+            <span
+                class="pin-dot"
+                id="pinDot4">
+            </span>
+
         </div>
 
-        <div class="pin-display" id="pinDisplay"></div>
+        <div
+            class="pin-result"
+            id="pinResult">
 
-        <div class="message" id="pinMessage"></div>
+            Yahh! PIN-nya salah! 😐
+            <br>
+            <span>Coba lagi ya!</span>
 
-        <div class="keypad">
+        </div>
 
-            <button class="key" onclick="pressKey('1')">1</button>
-            <button class="key" onclick="pressKey('2')">2</button>
-            <button class="key" onclick="pressKey('3')">3</button>
+        <div class="pin-keypad">
 
-            <button class="key" onclick="pressKey('4')">4</button>
-            <button class="key" onclick="pressKey('5')">5</button>
-            <button class="key" onclick="pressKey('6')">6</button>
+            <button onclick="pinPress('1')">
+                1
+            </button>
 
-            <button class="key" onclick="pressKey('7')">7</button>
-            <button class="key" onclick="pressKey('8')">8</button>
-            <button class="key" onclick="pressKey('9')">9</button>
+            <button onclick="pinPress('2')">
+                2
+            </button>
+
+            <button onclick="pinPress('3')">
+                3
+            </button>
+
+            <button onclick="pinPress('4')">
+                4
+            </button>
+
+            <button onclick="pinPress('5')">
+                5
+            </button>
+
+            <button onclick="pinPress('6')">
+                6
+            </button>
+
+            <button onclick="pinPress('7')">
+                7
+            </button>
+
+            <button onclick="pinPress('8')">
+                8
+            </button>
+
+            <button onclick="pinPress('9')">
+                9
+            </button>
 
             <div></div>
-            <button class="key" onclick="pressKey('0')">0</button>
-            <button class="key" onclick="deleteKey()">⌫</button>
+
+            <button onclick="pinPress('0')">
+                0
+            </button>
+
+            <button onclick="pinDelete()">
+                ⌫
+            </button>
 
         </div>
 
     </div>
+
 </section>
 
 
-<!-- ========================= -->
-<!-- PAGE 3 -->
-<!-- ========================= -->
+<!-- ==================================================
+     PAGE 3 — TEBAK 6 HAL
+================================================== -->
 
-<section class="page" id="page3">
+<section
+    class="page"
+    id="page3">
+
     <div class="card">
 
-        <div class="sticker">🤭</div>
+        <div class="sticker">
+            🤭
+        </div>
 
         <div class="title">
             Kamu tau ngga? 🤭
@@ -418,94 +843,155 @@ body{
             Ada 6 hal terindah di dunia ini 🌍
         </p>
 
-        <div class="beautiful-list">
+        <div class="list">
 
-            <div>6. Kupu-kupu 🦋</div>
-            <div>5. Bulan 🌙</div>
-            <div>4. Bintang ⭐</div>
-            <div>3. Pelangi 🌈</div>
-            <div>2. Bunga 🌸</div>
-            <div>1. <span class="hidden-answer">...</span></div>
+            <div>
+                6. Kupu-kupu 🦋
+            </div>
+
+            <div>
+                5. Bulan 🌙
+            </div>
+
+            <div>
+                4. Bintang ⭐
+            </div>
+
+            <div>
+                3. Pelangi 🌈
+            </div>
+
+            <div>
+                2. Bunga 🌸
+            </div>
+
+            <div>
+                1. <span class="answer">...</span>
+            </div>
 
         </div>
 
-        <div id="countdown" class="countdown">
+        <div
+            id="countdown"
+            class="countdown">
+
             3
+
         </div>
 
-        <p class="subtitle" id="waitText">
+        <p
+            id="waitText"
+            class="subtitle">
+
             tungguuu...
+
         </p>
 
     </div>
+
 </section>
 
 
-<!-- ========================= -->
-<!-- PAGE 4 -->
-<!-- ========================= -->
+<!-- ==================================================
+     PAGE 4 — REVEAL
+================================================== -->
 
-<section class="page" id="page4">
+<section
+    class="page"
+    id="page4">
+
     <div class="card">
 
-        <div class="sticker">😝</div>
-
-        <div class="title">
-            Berharap ada kamu di nomor-nomor ini? 🤭
+        <div class="sticker">
+            😝
         </div>
 
+        <div class="title">
+            Berharap ada kamu
+            di nomor-nomor ini? 🤭
+        </div>
+
+        <br>
+
         <p class="subtitle">
-            <br>
             Ga adaa! 😜🤙
         </p>
 
         <br>
 
-        <div class="type-text" id="typeText"></div>
+        <div
+            id="typeText"
+            class="type-text">
+        </div>
 
-        <button class="btn" id="nextBtn" onclick="nextPage(5)" style="display:none;">
+        <button
+            id="nextBtn"
+            class="btn"
+            onclick="goToFinalMessage()"
+            style="display:none;">
+
             lanjuttt 💌
+
         </button>
 
     </div>
+
 </section>
 
 
-<!-- ========================= -->
-<!-- PAGE 5 -->
-<!-- ========================= -->
+<!-- ==================================================
+     PAGE 5 — PESAN
+================================================== -->
 
-<section class="page" id="page5">
+<section
+    class="page"
+    id="page5">
+
     <div class="card">
 
-        <div class="sticker">💗</div>
+        <div class="sticker">
+            💗
+        </div>
 
-        <div class="final-title">
+        <div class="title">
             for youu, Viaa 💌
         </div>
 
-        <div class="type-text" id="finalText"></div>
+        <div
+            id="finalText"
+            class="type-text">
+        </div>
 
-        <button class="btn" id="finalBtn" onclick="finalSurprise()" style="display:none;">
+        <button
+            id="finalBtn"
+            class="btn"
+            onclick="finalSurprise()"
+            style="display:none;">
+
             buka pesan terakhir 💗
+
         </button>
 
     </div>
+
 </section>
 
 
-<!-- ========================= -->
-<!-- PAGE 6 -->
-<!-- ========================= -->
+<!-- ==================================================
+     PAGE 6 — ENDING
+================================================== -->
 
-<section class="page" id="page6">
+<section
+    class="page"
+    id="page6">
+
     <div class="card">
 
         <div class="big-heart">
             💗
         </div>
 
-        <div class="final-title">
+        <div class="title">
             happy girlfriend dayyy,
             Viaaaaa 🥹💗
         </div>
@@ -513,14 +999,22 @@ body{
         <div class="final-text">
 
             <p>
-                makasih yaaa udah hadir sampai sejauh ini.
+                makasih yaaa udah hadir
+                sampai sejauh ini.
+            </p>
+
+            <br>
+
+            <p>
+                aku bikin ini mungkin sederhana,
+                tapi aku bikinnya dengan tulusss.
             </p>
 
             <br>
 
             <p>
                 aku cuma mau kamu tahu,
-                kalau ada seseorang yang seneng
+                ada seseorang yang seneng
                 banget bisa kenal sama kamu.
             </p>
 
@@ -538,7 +1032,10 @@ body{
 
             <p>
                 pokoknya...
-                <b>you're my favorite person, always and forever. 🤍</b>
+                <b>
+                    you're my favorite person,
+                    always and forever. 🤍
+                </b>
             </p>
 
             <br>
@@ -549,8 +1046,12 @@ body{
 
         </div>
 
-        <button class="btn" onclick="heartRain()">
+        <button
+            class="btn"
+            onclick="heartRain()">
+
             💌 peluk virtual
+
         </button>
 
         <p class="small">
@@ -558,49 +1059,52 @@ body{
         </p>
 
     </div>
+
 </section>
 
 
 <script>
 
-/* =========================
+/* ==================================================
    PIN
-========================= */
+================================================== */
+
+/* GANTI ANGKA INI KALAU MAU PIN LAIN */
 
 const correctPIN = "1430";
 
-let enteredPIN = "";
+let currentPIN = "";
 
 
-/* =========================
+/* ==================================================
    PAGE SYSTEM
-========================= */
+================================================== */
 
 function showPage(number){
 
-    document.querySelectorAll(".page").forEach(page=>{
-        page.classList.remove("active");
-    });
+    document
+        .querySelectorAll(".page")
+        .forEach(page => {
 
-    document.getElementById("page" + number)
+            page.classList.remove("active");
+
+        });
+
+    document
+        .getElementById("page" + number)
         .classList.add("active");
-}
-
-
-function nextPage(number){
-
-    showPage(number);
 
 }
 
 
-/* =========================
+/* ==================================================
    START
-========================= */
+================================================== */
 
 function startWebsite(){
 
-    const music = document.getElementById("music");
+    const music =
+        document.getElementById("music");
 
     music.play().catch(()=>{});
 
@@ -609,77 +1113,71 @@ function startWebsite(){
 }
 
 
-/* =========================
+/* ==================================================
    MUSIC
-========================= */
-
-let musicPlaying = false;
+================================================== */
 
 function toggleMusic(){
 
-    const music = document.getElementById("music");
+    const music =
+        document.getElementById("music");
 
     if(music.paused){
 
         music.play();
-        musicPlaying = true;
 
     }else{
 
         music.pause();
-        musicPlaying = false;
 
     }
 
 }
 
 
-/* =========================
-   PIN BUTTON
-========================= */
+/* ==================================================
+   PIN PRESS
+================================================== */
 
-function pressKey(number){
+function pinPress(number){
 
-    if(enteredPIN.length >= 4) return;
+    if(currentPIN.length >= 4){
+        return;
+    }
 
-    enteredPIN += number;
+    currentPIN += number;
 
-    updatePIN();
+    updateDots();
 
-    if(enteredPIN.length === 4){
+    if(currentPIN.length === 4){
 
-        setTimeout(checkPIN,300);
+        setTimeout(checkPIN,250);
 
     }
 
 }
 
 
-function deleteKey(){
+/* ==================================================
+   DOTS
+================================================== */
 
-    enteredPIN = enteredPIN.slice(0,-1);
-
-    updatePIN();
-
-}
-
-
-function updatePIN(){
-
-    document.getElementById("pinDisplay").innerText =
-        "•".repeat(enteredPIN.length);
+function updateDots(){
 
     for(let i=1;i<=4;i++){
 
-        const dot = document.getElementById("dot"+i);
+        const dot =
+            document.getElementById(
+                "pinDot"+i
+            );
 
-        if(i <= enteredPIN.length){
+        if(i <= currentPIN.length){
 
-            dot.classList.add("filled");
+            dot.classList.add("active");
 
         }else{
 
-            dot.classList.remove("filled");
+            dot.classList.remove("active");
 
         }
 
@@ -688,93 +1186,151 @@ function updatePIN(){
 }
 
 
-/* =========================
+/* ==================================================
+   DELETE
+================================================== */
+
+function pinDelete(){
+
+    currentPIN =
+        currentPIN.slice(0,-1);
+
+    updateDots();
+
+}
+
+
+/* ==================================================
    CHECK PIN
-========================= */
+================================================== */
 
 function checkPIN(){
 
-    const message =
-        document.getElementById("pinMessage");
+    const result =
+        document.getElementById("pinResult");
 
-    if(enteredPIN === correctPIN){
+    if(currentPIN === correctPIN){
 
-        message.innerHTML =
-            "PIN benarrr 😳💗";
+        result.innerHTML =
+            "PIN-nya bener! 😳💗";
+
+        result.classList.add("show");
+        result.classList.add("success");
 
         setTimeout(()=>{
+
+            currentPIN = "";
+
+            updateDots();
+
+            result.classList.remove("show");
+            result.classList.remove("success");
 
             showPage(3);
 
             startCountdown();
 
-        },800);
+        },1000);
 
     }else{
 
-        message.innerHTML =
-            "Yahh! PIN-nya salah 😭<br>Coba lagi yaa!";
+        result.innerHTML =
+            "Yahh! PIN-nya salah! 😐" +
+            "<br>" +
+            "<span>Coba lagi ya!</span>";
 
-        enteredPIN = "";
+        result.classList.add("show");
 
-        setTimeout(updatePIN,300);
+        const card =
+            document.querySelector(".pin-card");
+
+        card.animate(
+            [
+                {transform:"translateX(0)"},
+                {transform:"translateX(-8px)"},
+                {transform:"translateX(8px)"},
+                {transform:"translateX(-6px)"},
+                {transform:"translateX(6px)"},
+                {transform:"translateX(0)"}
+            ],
+            {
+                duration:350
+            }
+        );
+
+        setTimeout(()=>{
+
+            currentPIN = "";
+
+            updateDots();
+
+            result.classList.remove("show");
+
+        },900);
 
     }
 
 }
 
 
-/* =========================
+/* ==================================================
    COUNTDOWN
-========================= */
+================================================== */
 
 function startCountdown(){
 
     let number = 3;
 
     const countdown =
-        document.getElementById("countdown");
+        document.getElementById(
+            "countdown"
+        );
 
     const waitText =
-        document.getElementById("waitText");
+        document.getElementById(
+            "waitText"
+        );
 
     countdown.innerText = number;
 
-    const timer = setInterval(()=>{
+    const timer =
+        setInterval(()=>{
 
-        number--;
+            number--;
 
-        if(number > 0){
+            if(number > 0){
 
-            countdown.innerText = number;
+                countdown.innerText =
+                    number;
 
-        }else{
+            }else{
 
-            clearInterval(timer);
+                clearInterval(timer);
 
-            countdown.innerText = "1 💗";
+                countdown.innerText =
+                    "1 💗";
 
-            waitText.innerText =
-                "ternyata nomor 1 adalah...";
+                waitText.innerText =
+                    "ternyata nomor 1 adalah...";
 
-            setTimeout(()=>{
+                setTimeout(()=>{
 
-                showPage(4);
+                    showPage(4);
 
-                startTyping();
+                    startTyping();
 
-            },1800);
+                },1700);
 
-        }
+            }
 
-    },1000);
+        },1000);
 
 }
 
 
-/* =========================
+/* ==================================================
    TYPEWRITER PAGE 4
-========================= */
+================================================== */
 
 const message1 =
 `Soalnya...
@@ -791,13 +1347,21 @@ gemesin, baik hati...
 pokoknyaa,
 you're my favorite person 🤍`;
 
-function typeWriter(text, element, speed, callback){
+
+function typeWriter(
+    text,
+    element,
+    speed,
+    callback
+){
 
     let index = 0;
 
     element.innerHTML = "";
 
-    const cursor = document.createElement("span");
+    const cursor =
+        document.createElement("span");
+
     cursor.className = "cursor";
 
     element.appendChild(cursor);
@@ -807,19 +1371,29 @@ function typeWriter(text, element, speed, callback){
         if(index < text.length){
 
             const char =
-                document.createTextNode(text.charAt(index));
+                document.createTextNode(
+                    text.charAt(index)
+                );
 
-            element.insertBefore(char,cursor);
+            element.insertBefore(
+                char,
+                cursor
+            );
 
             index++;
 
-            setTimeout(type,speed);
+            setTimeout(
+                type,
+                speed
+            );
 
         }else{
 
             cursor.remove();
 
-            if(callback) callback();
+            if(callback){
+                callback();
+            }
 
         }
 
@@ -832,25 +1406,65 @@ function typeWriter(text, element, speed, callback){
 
 function startTyping(){
 
-    const element =
-        document.getElementById("typeText");
-
     typeWriter(
         message1,
-        element,
+
+        document.getElementById(
+            "typeText"
+        ),
+
         35,
+
         ()=>{
-            document.getElementById("nextBtn")
-                .style.display="inline-block";
+
+            document.getElementById(
+                "nextBtn"
+            ).style.display =
+                "inline-block";
+
         }
     );
 
 }
 
 
-/* =========================
-   FINAL TEXT
-========================= */
+/* ==================================================
+   GO FINAL MESSAGE
+================================================== */
+
+function goToFinalMessage(){
+
+    showPage(5);
+
+    setTimeout(()=>{
+
+        typeWriter(
+            finalMessage,
+
+            document.getElementById(
+                "finalText"
+            ),
+
+            30,
+
+            ()=>{
+
+                document.getElementById(
+                    "finalBtn"
+                ).style.display =
+                    "inline-block";
+
+            }
+        );
+
+    },400);
+
+}
+
+
+/* ==================================================
+   FINAL MESSAGE
+================================================== */
 
 const finalMessage =
 `makasih yaaa udah hadir sampai sejauh ini.
@@ -872,40 +1486,12 @@ yang baik,
 yang kadang cuek,
 yang kadang bikin kesel,
 tapi tetap jadi seseorang
-yang punya tempat spesial. 🥹
-
-happy girlfriend dayyy,
-Viaaaaa 💗`;
-
-document
-    .getElementById("finalBtn")
-    .style.display="none";
+yang punya tempat spesial. 🥹`;
 
 
-/* Ketika page 5 dibuka */
-document.getElementById("nextBtn")
-    .addEventListener("click",()=>{
-
-        setTimeout(()=>{
-
-            typeWriter(
-                finalMessage,
-                document.getElementById("finalText"),
-                30,
-                ()=>{
-                    document.getElementById("finalBtn")
-                        .style.display="inline-block";
-                }
-            );
-
-        },300);
-
-    });
-
-
-/* =========================
+/* ==================================================
    FINAL SURPRISE
-========================= */
+================================================== */
 
 function finalSurprise(){
 
@@ -916,13 +1502,13 @@ function finalSurprise(){
 }
 
 
-/* =========================
+/* ==================================================
    HEART RAIN
-========================= */
+================================================== */
 
 function heartRain(){
 
-    const hearts = [
+    const emojis = [
         "💗",
         "💖",
         "💕",
@@ -937,27 +1523,41 @@ function heartRain(){
         const heart =
             document.createElement("div");
 
-        heart.className="heart-rain";
+        heart.className =
+            "heart-rain";
 
         heart.innerText =
-            hearts[Math.floor(Math.random()*hearts.length)];
+            emojis[
+                Math.floor(
+                    Math.random()
+                    * emojis.length
+                )
+            ];
 
         heart.style.left =
-            Math.random()*100 + "vw";
+            Math.random()*100 +
+            "vw";
 
         heart.style.fontSize =
-            (15 + Math.random()*25) + "px";
+            (15 + Math.random()*25) +
+            "px";
 
         heart.style.animationDuration =
-            (2 + Math.random()*3) + "s";
+            (2 + Math.random()*3) +
+            "s";
 
         heart.style.animationDelay =
-            Math.random()*1.5 + "s";
+            Math.random()*1.5 +
+            "s";
 
-        document.body.appendChild(heart);
+        document.body.appendChild(
+            heart
+        );
 
         setTimeout(()=>{
+
             heart.remove();
+
         },6000);
 
     }
@@ -967,4 +1567,4 @@ function heartRain(){
 </script>
 
 </body>
-    </html>
+</html>
