@@ -7,1257 +7,958 @@
 
 <style>
 *{
+    box-sizing:border-box;
     margin:0;
     padding:0;
-    box-sizing:border-box;
-}
-
-html,body{
-    width:100%;
-    height:100%;
-    overflow:hidden;
-    font-family:Arial,sans-serif;
 }
 
 body{
+    min-height:100vh;
+    font-family:Arial, Helvetica, sans-serif;
+    background:
+        radial-gradient(circle at 20% 20%, #ff9fc7 0%, transparent 25%),
+        radial-gradient(circle at 80% 80%, #b89cff 0%, transparent 25%),
+        linear-gradient(135deg,#17213b,#30204d,#551f46);
     color:white;
-}
-
-/* =========================
-   SLIDE
-========================= */
-
-.page{
-    position:fixed;
-    inset:0;
-
-    display:flex;
-    justify-content:center;
-    align-items:center;
-
-    padding:25px 18px;
-
-    opacity:0;
-    visibility:hidden;
-    transform:scale(1.08);
-
-    transition:
-        opacity .8s ease,
-        transform 1s ease,
-        visibility .8s;
-
     overflow:hidden;
 }
 
-.page.active{
-    opacity:1;
-    visibility:visible;
-    transform:scale(1);
-}
-
-
-/* =========================
-   BACKGROUND TIAP SLIDE
-========================= */
-
-#page1{
-    background:
-    radial-gradient(circle at 20% 20%,#ff9fc8,transparent 28%),
-    radial-gradient(circle at 80% 80%,#9d7cff,transparent 30%),
-    linear-gradient(135deg,#160d29,#35133f,#5d2850);
-}
-
-#page2{
-    background:
-    radial-gradient(circle at 80% 15%,#ffbad7,transparent 30%),
-    radial-gradient(circle at 15% 85%,#ffd39d,transparent 32%),
-    linear-gradient(135deg,#652346,#c44e76,#ff9dbd);
-}
-
-#page3{
-    background:
-    radial-gradient(circle at 50% 5%,#fbcde1,transparent 35%),
-    radial-gradient(circle at 10% 90%,#8e78d8,transparent 30%),
-    linear-gradient(135deg,#191832,#403866,#76639c);
-}
-
-#page4{
-    background:
-    radial-gradient(circle at 10% 10%,#7060ff,transparent 28%),
-    radial-gradient(circle at 90% 90%,#ff77ac,transparent 30%),
-    linear-gradient(135deg,#11132c,#292047,#552d54);
-}
-
-#page5{
-    background:
-    radial-gradient(circle at 50% 10%,#ffc38e,transparent 32%),
-    radial-gradient(circle at 10% 90%,#e8868d,transparent 30%),
-    linear-gradient(135deg,#2b1825,#65382e,#a56446);
-}
-
-#page6{
-    background:
-    radial-gradient(circle at 20% 15%,#a995ff,transparent 30%),
-    radial-gradient(circle at 85% 85%,#ff9bc9,transparent 30%),
-    linear-gradient(135deg,#15142e,#302149,#59324f);
-}
-
-#page7{
-    background:
-    radial-gradient(circle at 50% 20%,#ffbdd9,transparent 35%),
-    radial-gradient(circle at 15% 85%,#b49eff,transparent 30%),
-    linear-gradient(135deg,#20132d,#522346,#8d4e75);
-}
-
-
-/* =========================
-   PARTICLE
-========================= */
-
-.particles{
-    position:absolute;
-    inset:0;
+/* BACKGROUND */
+.bg-heart{
+    position:fixed;
+    font-size:25px;
+    opacity:.18;
+    animation:float 8s linear infinite;
     pointer-events:none;
 }
 
-.particle{
-    position:absolute;
+@keyframes float{
+    0%{
+        transform:translateY(110vh) rotate(0deg);
+        opacity:0;
+    }
+    20%{opacity:.2;}
+    80%{opacity:.2;}
+    100%{
+        transform:translateY(-15vh) rotate(360deg);
+        opacity:0;
+    }
+}
+
+/* MUSIC */
+.music-btn{
+    position:fixed;
+    top:15px;
+    right:15px;
+    width:45px;
+    height:45px;
+    border-radius:50%;
+    border:2px solid white;
+    background:rgba(255,255,255,.15);
     color:white;
-    opacity:.6;
-    animation:twinkle 3s infinite ease-in-out;
+    font-size:20px;
+    z-index:100;
+    backdrop-filter:blur(10px);
 }
 
-@keyframes twinkle{
-    0%,100%{
-        opacity:.15;
-        transform:scale(.6);
-    }
-
-    50%{
-        opacity:1;
-        transform:scale(1.4);
-    }
-}
-
-
-/* =========================
-   CARD
-========================= */
-
-.box{
-    position:relative;
-    z-index:10;
-
+/* PAGE */
+.page{
+    display:none;
     width:100%;
-    max-width:450px;
+    min-height:100vh;
+    align-items:center;
+    justify-content:center;
+    padding:25px;
+}
+
+.page.active{
+    display:flex;
+}
+
+/* CARD */
+.card{
+    width:min(92%,480px);
     max-height:88vh;
-
-    overflow-y:auto;
-
-    padding:34px 24px;
-
-    text-align:center;
-
-    border:1px solid rgba(255,255,255,.25);
-
-    border-radius:32px;
-
-    background:rgba(255,255,255,.12);
-
-    backdrop-filter:blur(18px);
-    -webkit-backdrop-filter:blur(18px);
-
+    overflow:auto;
+    padding:30px 25px;
+    border-radius:30px;
+    background:rgba(15,20,40,.75);
+    border:2px solid rgba(255,255,255,.8);
     box-shadow:
-    0 25px 70px rgba(0,0,0,.35),
-    inset 0 1px 0 rgba(255,255,255,.2);
-
-    animation:cardAppear 1s ease;
+        0 0 25px rgba(255,120,180,.25),
+        inset 0 0 25px rgba(255,255,255,.04);
+    backdrop-filter:blur(15px);
+    text-align:center;
+    animation:cardIn .7s ease;
 }
 
-.box::-webkit-scrollbar{
-    width:0;
-}
-
-@keyframes cardAppear{
+@keyframes cardIn{
     from{
         opacity:0;
-        transform:translateY(40px) scale(.94);
+        transform:scale(.9) translateY(20px);
     }
-
     to{
         opacity:1;
-        transform:translateY(0) scale(1);
+        transform:scale(1) translateY(0);
     }
 }
 
-
-/* =========================
-   TEXT
-========================= */
-
-h1{
-    font-size:29px;
-    line-height:1.3;
-    margin-bottom:17px;
-
-    text-shadow:
-    0 5px 20px rgba(0,0,0,.25);
+.title{
+    font-size:30px;
+    font-weight:800;
+    margin-bottom:12px;
 }
 
-h2{
-    font-size:24px;
-    margin-bottom:18px;
-}
-
-.typing{
-    min-height:30px;
+.subtitle{
     font-size:16px;
-    line-height:1.85;
+    line-height:1.6;
+    opacity:.9;
+}
 
-    color:rgba(255,255,255,.94);
+/* BUTTON */
+.btn{
+    border:none;
+    padding:14px 25px;
+    margin-top:20px;
+    border-radius:18px;
+    background:linear-gradient(135deg,#ff4f91,#ff76aa);
+    color:white;
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
+    box-shadow:0 8px 20px rgba(255,70,140,.3);
+    transition:.25s;
+}
+
+.btn:active{
+    transform:scale(.94);
+}
+
+/* OPENING */
+.big-heart{
+    font-size:75px;
+    animation:heartbeat 1.3s infinite;
+    margin-bottom:15px;
+}
+
+@keyframes heartbeat{
+    0%,100%{transform:scale(1);}
+    50%{transform:scale(1.15);}
+}
+
+/* PIN */
+.pin-dots{
+    display:flex;
+    justify-content:center;
+    gap:13px;
+    margin:22px 0;
+}
+
+.dot{
+    width:20px;
+    height:20px;
+    border:3px solid white;
+    border-radius:50%;
+    transition:.2s;
+}
+
+.dot.filled{
+    background:#ff5798;
+    box-shadow:0 0 12px #ff5798;
+}
+
+.pin-display{
+    font-size:20px;
+    min-height:25px;
+    letter-spacing:8px;
+}
+
+.keypad{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:10px;
+    margin-top:20px;
+}
+
+.key{
+    border:none;
+    border-radius:15px;
+    padding:15px;
+    background:rgba(255,70,130,.8);
+    color:white;
+    font-size:20px;
+    font-weight:bold;
+}
+
+.key:active{
+    transform:scale(.92);
+}
+
+.message{
+    margin-top:15px;
+    min-height:25px;
+    font-weight:bold;
+}
+
+/* IMAGE */
+.sticker{
+    width:120px;
+    height:120px;
+    object-fit:cover;
+    border-radius:50%;
+    border:5px solid rgba(255,255,255,.8);
+    margin-bottom:20px;
+    animation:bounce 2s ease-in-out infinite;
+}
+
+@keyframes bounce{
+    0%,100%{transform:translateY(0);}
+    50%{transform:translateY(-8px);}
+}
+
+/* LIST */
+.beautiful-list{
+    text-align:left;
+    margin:20px auto;
+    width:fit-content;
+    font-size:19px;
+    line-height:1.9;
+}
+
+.hidden-answer{
+    color:#ff83b7;
+    font-weight:bold;
+}
+
+/* COUNTDOWN */
+.countdown{
+    font-size:65px;
+    font-weight:900;
+    margin:20px;
+    color:#ff7daf;
+    text-shadow:0 0 20px rgba(255,80,150,.7);
+    animation:pop .8s;
+}
+
+@keyframes pop{
+    from{transform:scale(.3);opacity:0;}
+    to{transform:scale(1);opacity:1;}
+}
+
+/* TYPEWRITER */
+.type-text{
+    text-align:left;
+    font-size:17px;
+    line-height:1.8;
+    min-height:200px;
 }
 
 .cursor{
-    display:inline-block;
-    width:2px;
-    height:18px;
-
-    background:white;
-
-    margin-left:3px;
-
+    border-right:2px solid white;
     animation:blink .7s infinite;
 }
 
 @keyframes blink{
-    50%{
-        opacity:0;
-    }
+    50%{border-color:transparent;}
 }
 
-
-/* =========================
-   HEART
-========================= */
-
-.big-heart{
-    font-size:72px;
+/* FINAL */
+.final-title{
+    font-size:28px;
     margin-bottom:15px;
-
-    filter:
-    drop-shadow(0 8px 20px rgba(255,100,180,.4));
-
-    animation:heartbeat 1.5s infinite;
 }
 
-@keyframes heartbeat{
-    0%,100%{
-        transform:scale(1);
-    }
-
-    15%{
-        transform:scale(1.15);
-    }
-
-    30%{
-        transform:scale(1);
-    }
-
-    45%{
-        transform:scale(1.1);
-    }
+.final-text{
+    text-align:left;
+    line-height:1.8;
+    font-size:17px;
 }
 
-
-/* =========================
-   BUTTON
-========================= */
-
-button{
-    margin-top:27px;
-
-    border:1px solid rgba(255,255,255,.35);
-
-    padding:14px 27px;
-
-    border-radius:50px;
-
-    background:rgba(255,255,255,.16);
-
-    color:white;
-
-    font-size:15px;
-    font-weight:bold;
-
-    backdrop-filter:blur(10px);
-
-    box-shadow:
-    0 10px 30px rgba(0,0,0,.2),
-    inset 0 1px 0 rgba(255,255,255,.2);
-
-    cursor:pointer;
-
-    transition:.3s;
-}
-
-button:hover{
-    transform:translateY(-3px) scale(1.04);
-    background:rgba(255,255,255,.25);
-}
-
-button:active{
-    transform:scale(.94);
-}
-
-
-/* =========================
-   PHOTO
-========================= */
-
-.photo-frame{
-    padding:10px;
-
-    background:white;
-
-    border-radius:8px;
-
-    margin-bottom:23px;
-
-    box-shadow:
-    0 20px 45px rgba(0,0,0,.35);
-
-    transform:rotate(-2deg);
-
-    transition:.5s;
-}
-
-.photo-frame:hover{
-    transform:rotate(0deg) scale(1.03);
-}
-
-.photo{
-    width:100%;
-    height:285px;
-
-    display:block;
-
-    object-fit:cover;
-
-    border-radius:4px;
-}
-
-
-/* =========================
-   SIGNATURE
-========================= */
-
-.signature{
-    margin-top:22px;
-
-    font-size:15px;
-
-    font-weight:bold;
-
-    letter-spacing:1px;
-}
-
-
-/* =========================
-   PROGRESS
-========================= */
-
-.progress{
+.heart-rain{
     position:fixed;
-
-    top:18px;
-    left:50%;
-
-    transform:translateX(-50%);
-
-    z-index:50;
-
-    display:flex;
-
-    gap:7px;
-}
-
-.dot{
-    width:7px;
-    height:7px;
-
-    border-radius:20px;
-
-    background:rgba(255,255,255,.3);
-
-    transition:.4s;
-}
-
-.dot.active{
-    width:23px;
-    background:white;
-}
-
-
-/* =========================
-   MUSIC BUTTON
-========================= */
-
-.music-control{
-    position:fixed;
-
-    right:18px;
-    top:17px;
-
-    z-index:60;
-
-    width:42px;
-    height:42px;
-
-    border-radius:50%;
-
-    display:flex;
-    justify-content:center;
-    align-items:center;
-
-    background:rgba(255,255,255,.14);
-
-    border:1px solid rgba(255,255,255,.3);
-
-    backdrop-filter:blur(10px);
-
-    font-size:18px;
-
-    cursor:pointer;
-
-    box-shadow:
-    0 8px 20px rgba(0,0,0,.2);
-
-    transition:.3s;
-}
-
-.music-control.playing{
-    animation:musicPulse 1.2s infinite;
-}
-
-@keyframes musicPulse{
-    50%{
-        transform:scale(1.12);
-    }
-}
-
-
-/* =========================
-   FLOATING EMOJI
-========================= */
-
-.floating{
-    position:fixed;
-
-    bottom:-50px;
-
-    z-index:4;
-
     pointer-events:none;
-
-    animation:floatUp linear forwards;
+    animation:heartRain 4s linear forwards;
+    z-index:200;
 }
 
-@keyframes floatUp{
-
+@keyframes heartRain{
     0%{
-        transform:
-        translateY(0)
-        rotate(0deg);
-
-        opacity:0;
+        transform:translateY(-10vh) rotate(0);
+        opacity:1;
     }
-
-    15%{
-        opacity:.85;
-    }
-
     100%{
-        transform:
-        translateY(-115vh)
-        rotate(30deg);
-
+        transform:translateY(110vh) rotate(360deg);
         opacity:0;
     }
 }
 
-
-/* =========================
-   ORB
-========================= */
-
-.orb{
-    position:absolute;
-
-    border-radius:50%;
-
-    filter:blur(5px);
-
-    opacity:.2;
-
-    animation:orbMove 8s infinite alternate ease-in-out;
-}
-
-.orb1{
-    width:180px;
-    height:180px;
-
-    top:-70px;
-    left:-70px;
-
-    background:#ff9fc9;
-}
-
-.orb2{
-    width:220px;
-    height:220px;
-
-    right:-90px;
-    bottom:-90px;
-
-    background:#a18cff;
-
-    animation-delay:2s;
-}
-
-@keyframes orbMove{
-
-    from{
-        transform:translate(0,0);
-    }
-
-    to{
-        transform:translate(25px,-20px);
-    }
-}
-
-
-/* =========================
-   MOBILE
-========================= */
-
-@media(max-width:500px){
-
-    .box{
-        padding:30px 20px;
-        max-height:85vh;
-    }
-
-    h1{
-        font-size:27px;
-    }
-
-    h2{
-        font-size:22px;
-    }
-
-    .typing{
-        font-size:15px;
-    }
-
-    .photo{
-        height:255px;
-    }
-
-    .big-heart{
-        font-size:64px;
-    }
+.small{
+    font-size:13px;
+    opacity:.7;
+    margin-top:15px;
 }
 </style>
 </head>
 
-
 <body>
 
+<!-- FLOATING BACKGROUND -->
+<div class="bg-heart" style="left:8%;animation-delay:0s;">♡</div>
+<div class="bg-heart" style="left:22%;animation-delay:2s;">♥</div>
+<div class="bg-heart" style="left:40%;animation-delay:4s;">♡</div>
+<div class="bg-heart" style="left:63%;animation-delay:1s;">♥</div>
+<div class="bg-heart" style="left:82%;animation-delay:3s;">♡</div>
 
-<!-- =========================
-     MUSIC
-========================= -->
-
-<audio id="bgMusic" loop>
-    <source
-        src="ssstik.io_1788416305101.mp3"
-        type="audio/mpeg">
+<!-- MUSIC -->
+<audio id="music" loop>
+    <source src="ssstik.io_1788416305101.mp3" type="audio/mpeg">
 </audio>
 
-
-<!-- =========================
-     MUSIC CONTROL
-========================= -->
-
-<div
-    class="music-control"
-    id="musicButton"
-    onclick="toggleMusic()">
-    🎵
-</div>
+<button class="music-btn" onclick="toggleMusic()">🎵</button>
 
 
-<!-- =========================
-     PROGRESS
-========================= -->
-
-<div class="progress">
-
-    <div class="dot active"></div>
-    <div class="dot"></div>
-    <div class="dot"></div>
-    <div class="dot"></div>
-    <div class="dot"></div>
-    <div class="dot"></div>
-    <div class="dot"></div>
-
-</div>
-
-
-<!-- =====================================================
-     PAGE 1
-===================================================== -->
+<!-- ========================= -->
+<!-- PAGE 1 -->
+<!-- ========================= -->
 
 <section class="page active" id="page1">
+    <div class="card">
 
-    <div class="particles"></div>
+        <div class="big-heart">💗</div>
 
-    <div class="orb orb1"></div>
-    <div class="orb orb2"></div>
-
-    <div class="box">
-
-        <div class="big-heart">
-            💗
+        <div class="title">
+            semogaa kamuuu sukaa yaaaa
         </div>
 
-        <h1>
-            semogaa kamuuu sukaa yaaaa
-        </h1>
-
-        <p
-            class="typing"
-            data-text="aku bikin sesuatu kecil buat kamu... mungkin sederhana, tapi aku bikinnya dengan tulusss.">
+        <p class="subtitle">
+            aku bikin sesuatu kecil buat kamu...
+            <br>
+            mungkin sederhana, tapi aku bikinnya
+            dengan tulusss 🥹
         </p>
 
-        <button onclick="nextPage()">
-            tekan disinii 💗
+        <button class="btn" onclick="startWebsite()">
+            tekan disinii 💌
         </button>
 
-    </div>
+        <p class="small">
+            made specially for Viaa ♡
+        </p>
 
+    </div>
 </section>
 
 
-<!-- =====================================================
-     PAGE 2
-===================================================== -->
+<!-- ========================= -->
+<!-- PAGE 2 PIN -->
+<!-- ========================= -->
 
 <section class="page" id="page2">
+    <div class="card">
 
-    <div class="particles"></div>
+        <div class="sticker">🔐</div>
 
-    <div class="orb orb1"></div>
-    <div class="orb orb2"></div>
-
-    <div class="box">
-
-        <div class="big-heart">
-            🌷
+        <div class="title">
+            Tebak PIN-nya yaaw 🔐🎉
         </div>
 
-        <h2>
-            haiii Viaaaa
-        </h2>
-
-        <p
-            class="typing"
-            data-text="sebelum kamu lanjut, aku cuma mau bilang makasihhh karena udah hadir di hidup aku. mungkin kamu nggak sadar, tapi kehadiran kamu punya arti yang cukup besar buat aku.">
+        <p class="subtitle">
+            Masukkan 4 angka PIN yang tepat!
         </p>
 
-        <button onclick="nextPage()">
-            lanjuttt 💗
-        </button>
+        <div class="pin-dots">
+            <div class="dot" id="dot1"></div>
+            <div class="dot" id="dot2"></div>
+            <div class="dot" id="dot3"></div>
+            <div class="dot" id="dot4"></div>
+        </div>
+
+        <div class="pin-display" id="pinDisplay"></div>
+
+        <div class="message" id="pinMessage"></div>
+
+        <div class="keypad">
+
+            <button class="key" onclick="pressKey('1')">1</button>
+            <button class="key" onclick="pressKey('2')">2</button>
+            <button class="key" onclick="pressKey('3')">3</button>
+
+            <button class="key" onclick="pressKey('4')">4</button>
+            <button class="key" onclick="pressKey('5')">5</button>
+            <button class="key" onclick="pressKey('6')">6</button>
+
+            <button class="key" onclick="pressKey('7')">7</button>
+            <button class="key" onclick="pressKey('8')">8</button>
+            <button class="key" onclick="pressKey('9')">9</button>
+
+            <div></div>
+            <button class="key" onclick="pressKey('0')">0</button>
+            <button class="key" onclick="deleteKey()">⌫</button>
+
+        </div>
 
     </div>
-
 </section>
 
 
-<!-- =====================================================
-     PAGE 3
-===================================================== -->
+<!-- ========================= -->
+<!-- PAGE 3 -->
+<!-- ========================= -->
 
 <section class="page" id="page3">
+    <div class="card">
 
-    <div class="particles"></div>
+        <div class="sticker">🤭</div>
 
-    <div class="orb orb1"></div>
-    <div class="orb orb2"></div>
+        <div class="title">
+            Kamu tau ngga? 🤭
+        </div>
 
-    <div class="box">
+        <p class="subtitle">
+            Ada 6 hal terindah di dunia ini 🌍
+        </p>
 
-        <div class="photo-frame">
+        <div class="beautiful-list">
 
-            <img
-                class="photo"
-                src="Screenshot_2026-08-02-07-17-12-177_com.miui.gallery.jpg"
-                alt="Foto Viaa">
+            <div>6. Kupu-kupu 🦋</div>
+            <div>5. Bulan 🌙</div>
+            <div>4. Bintang ⭐</div>
+            <div>3. Pelangi 🌈</div>
+            <div>2. Bunga 🌸</div>
+            <div>1. <span class="hidden-answer">...</span></div>
 
         </div>
 
-        <h2>
-            satu foto buat kamu 📸
-        </h2>
+        <div id="countdown" class="countdown">
+            3
+        </div>
 
-        <p
-            class="typing"
-            data-text="ada banyak hal yang mungkin nggak bisa aku jelasin dengan kata-kata, tapi setiap kali lihat kamu, aku selalu ngerasa seneng.">
+        <p class="subtitle" id="waitText">
+            tungguuu...
         </p>
 
-        <button onclick="nextPage()">
-            masih ada lagi 💗
-        </button>
-
     </div>
-
 </section>
 
 
-<!-- =====================================================
-     PAGE 4
-===================================================== -->
+<!-- ========================= -->
+<!-- PAGE 4 -->
+<!-- ========================= -->
 
 <section class="page" id="page4">
+    <div class="card">
 
-    <div class="particles"></div>
+        <div class="sticker">😝</div>
 
-    <div class="orb orb1"></div>
-    <div class="orb orb2"></div>
-
-    <div class="box">
-
-        <div class="big-heart">
-            💌
+        <div class="title">
+            Berharap ada kamu di nomor-nomor ini? 🤭
         </div>
 
-        <h2>
-            aku mau jujur sedikit...
-        </h2>
-
-        <p
-            class="typing"
-            data-text="aku nggak pernah berharap semuanya harus sempurna. aku cuma seneng bisa kenal kamu, bisa ngobrol sama kamu, bisa denger cerita kamu, dan bisa jadi salah satu orang yang ada di hari-hari kamu. kalau suatu hari kamu lagi capek, semoga kamu selalu punya alasan buat tetap tersenyum.">
+        <p class="subtitle">
+            <br>
+            Ga adaa! 😜🤙
         </p>
 
-        <button onclick="nextPage()">
-            tekan lagi yaaa 🥺
+        <br>
+
+        <div class="type-text" id="typeText"></div>
+
+        <button class="btn" id="nextBtn" onclick="nextPage(5)" style="display:none;">
+            lanjuttt 💌
         </button>
 
     </div>
-
 </section>
 
 
-<!-- =====================================================
-     PAGE 5
-===================================================== -->
+<!-- ========================= -->
+<!-- PAGE 5 -->
+<!-- ========================= -->
 
 <section class="page" id="page5">
+    <div class="card">
 
-    <div class="particles"></div>
+        <div class="sticker">💗</div>
 
-    <div class="orb orb1"></div>
-    <div class="orb orb2"></div>
-
-    <div class="box">
-
-        <div class="photo-frame">
-
-            <img
-                class="photo"
-                src="IMG_20260806_070520.jpg"
-                alt="Kenangan">
-
+        <div class="final-title">
+            for youu, Viaa 💌
         </div>
 
-        <h2>
-            sedikit kenangan 💗
-        </h2>
+        <div class="type-text" id="finalText"></div>
 
-        <p
-            class="typing"
-            data-text="mungkin buat kamu ini cuma hal kecil, tapi buat aku, hal-hal kecil tentang kamu justru yang paling aku inget.">
-        </p>
-
-        <button onclick="nextPage()">
-            lanjut lagi 🌷
+        <button class="btn" id="finalBtn" onclick="finalSurprise()" style="display:none;">
+            buka pesan terakhir 💗
         </button>
 
     </div>
-
 </section>
 
 
-<!-- =====================================================
-     PAGE 6
-===================================================== -->
+<!-- ========================= -->
+<!-- PAGE 6 -->
+<!-- ========================= -->
 
 <section class="page" id="page6">
-
-    <div class="particles"></div>
-
-    <div class="orb orb1"></div>
-    <div class="orb orb2"></div>
-
-    <div class="box">
-
-        <div class="big-heart">
-            🤍
-        </div>
-
-        <h2>
-            buat Viaa
-        </h2>
-
-        <p
-            class="typing"
-            data-text="makasih yaaa udah hadir sampai sejauh ini. aku cuma mau kamu tahu kalau ada seseorang yang selalu seneng bisa mengenal kamu. seseorang yang mungkin nggak selalu bisa mengatakan semuanya dengan baik, tapi selalu berusaha memberikan yang terbaik dengan caranya sendiri. aku nggak tahu ke depannya bakal seperti apa. aku juga nggak mau maksa kamu untuk merasakan hal yang sama. aku cuma berharap kamu selalu bahagia, selalu dikelilingi orang-orang baik, dan nggak pernah merasa sendirian. kalau suatu hari kamu butuh seseorang buat dengerin cerita kamu, semoga aku masih boleh jadi salah satunya.">
-        </p>
-
-        <button onclick="nextPage()">
-            satu hal terakhir... 💗
-        </button>
-
-    </div>
-
-</section>
-
-
-<!-- =====================================================
-     PAGE 7
-===================================================== -->
-
-<section class="page" id="page7">
-
-    <div class="particles"></div>
-
-    <div class="orb orb1"></div>
-    <div class="orb orb2"></div>
-
-    <div class="box">
+    <div class="card">
 
         <div class="big-heart">
             💗
         </div>
 
-        <h1>
-            Happy Girlfriend Dayyy
-        </h1>
-
-        <h2>
-            Viaaaaa 🤍
-        </h2>
-
-        <p
-            class="typing"
-            data-text="semoga kamu sukaaa yaaa. nggak perlu balas apa-apa, cukup senyum aja kalau kamu suka. 🥺💗 semoga hari-hari kamu selalu dipenuhi hal-hal baik dan orang-orang yang tulus sayang sama kamu.">
-        </p>
-
-        <div class="signature">
-            dibuat dengan tulusss 💗
+        <div class="final-title">
+            happy girlfriend dayyy,
+            Viaaaaa 🥹💗
         </div>
 
-    </div>
+        <div class="final-text">
 
+            <p>
+                makasih yaaa udah hadir sampai sejauh ini.
+            </p>
+
+            <br>
+
+            <p>
+                aku cuma mau kamu tahu,
+                kalau ada seseorang yang seneng
+                banget bisa kenal sama kamu.
+            </p>
+
+            <br>
+
+            <p>
+                kamu bukan cuma indah,
+                tapi juga cakep, lucu, imut,
+                gemesin, baik hati,
+                dan punya tempat sendiri
+                di pikiranku. 🥹
+            </p>
+
+            <br>
+
+            <p>
+                pokoknya...
+                <b>you're my favorite person, always and forever. 🤍</b>
+            </p>
+
+            <br>
+
+            <p style="text-align:center;">
+                semogaa kamuuu sukaa yaaaa 💗
+            </p>
+
+        </div>
+
+        <button class="btn" onclick="heartRain()">
+            💌 peluk virtual
+        </button>
+
+        <p class="small">
+            dibuat dengan tulusss untuk Viaa ♡
+        </p>
+
+    </div>
 </section>
 
 
 <script>
 
-/* =====================================================
+/* =========================
+   PIN
+========================= */
+
+const correctPIN = "1430";
+
+let enteredPIN = "";
+
+
+/* =========================
    PAGE SYSTEM
-===================================================== */
+========================= */
 
-let currentPage = 1;
+function showPage(number){
 
-const totalPages = 7;
-
-let typingTimer;
-
-
-/* =====================================================
-   NEXT PAGE
-===================================================== */
-
-function nextPage(){
-
-    if(currentPage >= totalPages){
-        return;
-    }
-
-
-    /* MUSIC START */
-
-    const music =
-        document.getElementById("bgMusic");
-
-    if(music.paused){
-
-        music.volume = 0.45;
-
-        music.play()
-        .then(()=>{
-
-            document
-            .getElementById("musicButton")
-            .classList.add("playing");
-
-        })
-        .catch(()=>{});
-
-    }
-
-
-    /* PAGE */
-
-    const oldPage =
-        document.getElementById(
-            "page" + currentPage
-        );
-
-    currentPage++;
-
-    const newPage =
-        document.getElementById(
-            "page" + currentPage
-        );
-
-    oldPage.classList.remove("active");
-
-    newPage.classList.add("active");
-
-
-    /* PROGRESS */
-
-    updateDots();
-
-
-    /* TYPE */
-
-    setTimeout(()=>{
-        startTyping(newPage);
-    },500);
-
-
-    /* BURST */
-
-    createBurst();
-
-}
-
-
-/* =====================================================
-   TYPING EFFECT
-===================================================== */
-
-function startTyping(page){
-
-    clearInterval(typingTimer);
-
-    const element =
-        page.querySelector(".typing");
-
-    if(!element){
-        return;
-    }
-
-    const text =
-        element.getAttribute("data-text");
-
-    element.innerHTML =
-        '<span class="cursor"></span>';
-
-    let index = 0;
-
-    typingTimer =
-        setInterval(()=>{
-
-            if(index < text.length){
-
-                element.innerHTML =
-                    text.substring(0,index + 1)
-                    +
-                    '<span class="cursor"></span>';
-
-                index++;
-
-            }
-            else{
-
-                clearInterval(typingTimer);
-
-            }
-
-        },28);
-
-}
-
-
-/* =====================================================
-   START FIRST TEXT
-===================================================== */
-
-window.addEventListener("load",()=>{
-
-    const firstPage =
-        document.getElementById("page1");
-
-    startTyping(firstPage);
-
-});
-
-
-/* =====================================================
-   DOTS
-===================================================== */
-
-function updateDots(){
-
-    const dots =
-        document.querySelectorAll(".dot");
-
-    dots.forEach((dot,index)=>{
-
-        dot.classList.toggle(
-            "active",
-            index === currentPage - 1
-        );
-
+    document.querySelectorAll(".page").forEach(page=>{
+        page.classList.remove("active");
     });
 
+    document.getElementById("page" + number)
+        .classList.add("active");
 }
 
 
-/* =====================================================
+function nextPage(number){
+
+    showPage(number);
+
+}
+
+
+/* =========================
+   START
+========================= */
+
+function startWebsite(){
+
+    const music = document.getElementById("music");
+
+    music.play().catch(()=>{});
+
+    showPage(2);
+
+}
+
+
+/* =========================
    MUSIC
-===================================================== */
+========================= */
+
+let musicPlaying = false;
 
 function toggleMusic(){
 
-    const music =
-        document.getElementById("bgMusic");
-
-    const button =
-        document.getElementById("musicButton");
-
+    const music = document.getElementById("music");
 
     if(music.paused){
 
-        music.volume = .45;
-
         music.play();
+        musicPlaying = true;
 
-        button.classList.add("playing");
-
-    }
-    else{
+    }else{
 
         music.pause();
-
-        button.classList.remove("playing");
+        musicPlaying = false;
 
     }
 
 }
 
 
-/* =====================================================
-   FLOATING EMOJI
-===================================================== */
+/* =========================
+   PIN BUTTON
+========================= */
 
-function createFloating(){
+function pressKey(number){
+
+    if(enteredPIN.length >= 4) return;
+
+    enteredPIN += number;
+
+    updatePIN();
+
+    if(enteredPIN.length === 4){
+
+        setTimeout(checkPIN,300);
+
+    }
+
+}
+
+
+function deleteKey(){
+
+    enteredPIN = enteredPIN.slice(0,-1);
+
+    updatePIN();
+
+}
+
+
+function updatePIN(){
+
+    document.getElementById("pinDisplay").innerText =
+        "•".repeat(enteredPIN.length);
+
+    for(let i=1;i<=4;i++){
+
+        const dot = document.getElementById("dot"+i);
+
+        if(i <= enteredPIN.length){
+
+            dot.classList.add("filled");
+
+        }else{
+
+            dot.classList.remove("filled");
+
+        }
+
+    }
+
+}
+
+
+/* =========================
+   CHECK PIN
+========================= */
+
+function checkPIN(){
+
+    const message =
+        document.getElementById("pinMessage");
+
+    if(enteredPIN === correctPIN){
+
+        message.innerHTML =
+            "PIN benarrr 😳💗";
+
+        setTimeout(()=>{
+
+            showPage(3);
+
+            startCountdown();
+
+        },800);
+
+    }else{
+
+        message.innerHTML =
+            "Yahh! PIN-nya salah 😭<br>Coba lagi yaa!";
+
+        enteredPIN = "";
+
+        setTimeout(updatePIN,300);
+
+    }
+
+}
+
+
+/* =========================
+   COUNTDOWN
+========================= */
+
+function startCountdown(){
+
+    let number = 3;
+
+    const countdown =
+        document.getElementById("countdown");
+
+    const waitText =
+        document.getElementById("waitText");
+
+    countdown.innerText = number;
+
+    const timer = setInterval(()=>{
+
+        number--;
+
+        if(number > 0){
+
+            countdown.innerText = number;
+
+        }else{
+
+            clearInterval(timer);
+
+            countdown.innerText = "1 💗";
+
+            waitText.innerText =
+                "ternyata nomor 1 adalah...";
+
+            setTimeout(()=>{
+
+                showPage(4);
+
+                startTyping();
+
+            },1800);
+
+        }
+
+    },1000);
+
+}
+
+
+/* =========================
+   TYPEWRITER PAGE 4
+========================= */
+
+const message1 =
+`Soalnya...
+
+kalau kamu itu ga bisa dihitung
+pake nomer! 😆
+
+kamu bukan cuma indah,
+tapi juga:
+
+cakep, lucu, imut,
+gemesin, baik hati...
+
+pokoknyaa,
+you're my favorite person 🤍`;
+
+function typeWriter(text, element, speed, callback){
+
+    let index = 0;
+
+    element.innerHTML = "";
+
+    const cursor = document.createElement("span");
+    cursor.className = "cursor";
+
+    element.appendChild(cursor);
+
+    function type(){
+
+        if(index < text.length){
+
+            const char =
+                document.createTextNode(text.charAt(index));
+
+            element.insertBefore(char,cursor);
+
+            index++;
+
+            setTimeout(type,speed);
+
+        }else{
+
+            cursor.remove();
+
+            if(callback) callback();
+
+        }
+
+    }
+
+    type();
+
+}
+
+
+function startTyping(){
 
     const element =
-        document.createElement("div");
+        document.getElementById("typeText");
 
-    element.className="floating";
-
-
-    const emojis = [
-        "💗",
-        "💕",
-        "💖",
-        "💓",
-        "🤍",
-        "✨",
-        "🌸",
-        "🌷",
-        "🥺"
-    ];
-
-
-    element.innerHTML =
-        emojis[
-            Math.floor(
-                Math.random()*emojis.length
-            )
-        ];
-
-
-    element.style.left =
-        Math.random()*100 + "vw";
-
-
-    element.style.fontSize =
-        15 + Math.random()*20 + "px";
-
-
-    element.style.animationDuration =
-        5 + Math.random()*4 + "s";
-
-
-    document.body.appendChild(element);
-
-
-    setTimeout(()=>{
-
-        element.remove();
-
-    },9000);
+    typeWriter(
+        message1,
+        element,
+        35,
+        ()=>{
+            document.getElementById("nextBtn")
+                .style.display="inline-block";
+        }
+    );
 
 }
 
 
-setInterval(createFloating,650);
+/* =========================
+   FINAL TEXT
+========================= */
 
+const finalMessage =
+`makasih yaaa udah hadir sampai sejauh ini.
 
-/* =====================================================
-   PARTICLES
-===================================================== */
+aku bikin ini mungkin sederhana,
+tapi aku bikinnya dengan tulusss.
+
+aku cuma mau kamu tahu,
+ada seseorang yang seneng banget
+bisa kenal sama kamu.
+
+aku ga berharap semuanya harus sempurna.
+
+aku cuma berharap,
+kamu tetap jadi kamu yang aku kenal.
+
+yang lucu,
+yang baik,
+yang kadang cuek,
+yang kadang bikin kesel,
+tapi tetap jadi seseorang
+yang punya tempat spesial. 🥹
+
+happy girlfriend dayyy,
+Viaaaaa 💗`;
 
 document
-.querySelectorAll(".particles")
-.forEach(container=>{
-
-    for(let i=0;i<40;i++){
-
-        const particle =
-            document.createElement("div");
-
-        particle.className="particle";
-
-        particle.innerHTML =
-            Math.random()>.5
-            ? "✦"
-            : "•";
+    .getElementById("finalBtn")
+    .style.display="none";
 
 
-        particle.style.left =
-            Math.random()*100+"%";
+/* Ketika page 5 dibuka */
+document.getElementById("nextBtn")
+    .addEventListener("click",()=>{
+
+        setTimeout(()=>{
+
+            typeWriter(
+                finalMessage,
+                document.getElementById("finalText"),
+                30,
+                ()=>{
+                    document.getElementById("finalBtn")
+                        .style.display="inline-block";
+                }
+            );
+
+        },300);
+
+    });
 
 
-        particle.style.top =
-            Math.random()*100+"%";
+/* =========================
+   FINAL SURPRISE
+========================= */
+
+function finalSurprise(){
+
+    showPage(6);
+
+    heartRain();
+
+}
 
 
-        particle.style.fontSize =
-            5 + Math.random()*9+"px";
+/* =========================
+   HEART RAIN
+========================= */
 
+function heartRain(){
 
-        particle.style.animationDelay =
-            Math.random()*4+"s";
+    const hearts = [
+        "💗",
+        "💖",
+        "💕",
+        "💓",
+        "💘",
+        "🤍",
+        "🌸"
+    ];
 
-
-        particle.style.animationDuration =
-            2 + Math.random()*4+"s";
-
-
-        container.appendChild(particle);
-
-    }
-
-});
-
-
-/* =====================================================
-   HEART BURST
-===================================================== */
-
-function createBurst(){
-
-    for(let i=0;i<10;i++){
+    for(let i=0;i<35;i++){
 
         const heart =
             document.createElement("div");
 
-        heart.innerHTML =
-            Math.random()>.3
-            ? "💗"
-            : "✨";
+        heart.className="heart-rain";
 
+        heart.innerText =
+            hearts[Math.floor(Math.random()*hearts.length)];
 
-        heart.style.position="fixed";
-
-        heart.style.left="50%";
-
-        heart.style.top="50%";
-
-        heart.style.zIndex="100";
-
-        heart.style.pointerEvents="none";
+        heart.style.left =
+            Math.random()*100 + "vw";
 
         heart.style.fontSize =
-            14 + Math.random()*12+"px";
+            (15 + Math.random()*25) + "px";
 
+        heart.style.animationDuration =
+            (2 + Math.random()*3) + "s";
 
-        const x =
-            (Math.random()-.5)*320;
-
-        const y =
-            (Math.random()-.5)*320;
-
-
-        heart.animate(
-
-            [
-                {
-                    transform:
-                    "translate(-50%,-50%) scale(.4)",
-
-                    opacity:1
-                },
-
-                {
-                    transform:
-                    `translate(
-                        calc(-50% + ${x}px),
-                        calc(-50% + ${y}px)
-                    )
-                    scale(1.5)`,
-
-                    opacity:0
-                }
-
-            ],
-
-            {
-                duration:1100,
-
-                easing:"cubic-bezier(.2,.8,.3,1)"
-            }
-
-        );
-
+        heart.style.animationDelay =
+            Math.random()*1.5 + "s";
 
         document.body.appendChild(heart);
 
-
         setTimeout(()=>{
-
             heart.remove();
-
-        },1100);
+        },6000);
 
     }
 
@@ -1266,4 +967,4 @@ function createBurst(){
 </script>
 
 </body>
-</html>
+    </html>
